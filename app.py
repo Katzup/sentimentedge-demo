@@ -7,8 +7,8 @@ Political & Economic Event Analysis - Cloud Version
 import streamlit as st
 import pandas as pd
 import numpy as np
-from datetime import datetime, timedelta
-import os
+from datetime import datetime
+import random
 
 # Cloud configuration
 st.set_page_config(
@@ -17,15 +17,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-# Handle credentials for cloud deployment
-try:
-    # Try Streamlit secrets first (for cloud)
-    if hasattr(st, 'secrets'):
-        # Streamlit Cloud secrets handling can be added later if needed
-        pass
-except:
-    pass
 
 def main():
     """Main demo interface for Nathan"""
@@ -40,11 +31,8 @@ def main():
         "Select Demo Component:",
         [
             "🎯 Interactive Event Analysis",
-            "🌍 Global Political Economy Analysis",
-            "🏛️ Political Impact Mapping", 
-            "📈 Historical Event Backtesting",
-            "💼 Live Trading Integration",
-            "📊 Performance Analytics"
+            "📊 Performance Analytics",
+            "💼 Live Trading Integration"
         ]
     )
     
@@ -90,16 +78,10 @@ def main():
         if submitted and event_text:
             st.success("🚀 Analyzing event impact...")
             
-            # Simulate real-time analysis
-            with st.spinner("Processing political event through SentimentEdge™..."):
-                import time
-                time.sleep(2)  # Simulate processing time
-            
             # Generate analysis results
             st.subheader("📊 Impact Analysis Results")
             
             # Overall impact score
-            import random
             random.seed(hash(event_text) % 1000)  # Consistent results for same input
             impact_score = random.uniform(0.4, 0.9)
             
@@ -271,18 +253,6 @@ def main():
                 'Benchmark': ['2.1%', '8.2%', '1.12', '0.00']
             })
             st.dataframe(return_metrics, use_container_width=True)
-    
-    else:
-        # Simplified versions of other demos for cloud
-        st.header(demo_type)
-        st.info("This demo component shows SentimentEdge's comprehensive political and economic analysis capabilities. Contact for full technical demonstration.")
-        
-        if "Global" in demo_type:
-            st.markdown("**Multi-country political risk assessment and cross-border impact analysis**")
-        elif "Political Impact" in demo_type:
-            st.markdown("**Policy-to-industry impact mapping with quantified predictions**") 
-        elif "Backtesting" in demo_type:
-            st.markdown("**Historical validation: 76% prediction accuracy across 200+ political events**")
     
     # Footer
     st.markdown("---")
